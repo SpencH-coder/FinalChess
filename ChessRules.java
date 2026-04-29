@@ -12,7 +12,7 @@ public class ChessRules {
         if (mover == null) return false;
         Piece target = board[toR][toC];
         if (target != null && target.getColor() == mover.getColor()) return false;
-        // delegated to "already built component" — return true for the demo
+
         
         int deltaRow = toR - fromR;
         int deltaCol = toC - fromC;
@@ -77,9 +77,9 @@ public class ChessRules {
         }else{
             int step;
 			if(toC > fromC){
-				step = 1;   //  right
+				step = 1;   //  rigt
 			}else{
-				step = -1;  //  left
+				step = -1;  // left
 			}
             for(int c = fromC + step; c != toC; c += step)
                 if(board[fromR][c] != null){
@@ -105,7 +105,7 @@ public class ChessRules {
 
         int rowStep;
         if(toR > fromR){
-			rowStep = 1;   //  right
+			rowStep = 1;   //   right
 		}else{
 			rowStep = -1;  //  left
 		}
