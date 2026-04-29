@@ -19,7 +19,7 @@ public class ChessBoardPanel extends JPanel {
     private static final Color HOVER  = new Color(0xFF, 0xEB, 0x3B, 160);
 
     private final Piece[][] board = new Piece[N][N];
-    private final ChessRules rules = new ChessRules();
+    private final ChessRule rules = new ChessRule();
     private final PixelSpriteRenderer sprites = new PixelSpriteRenderer();
 
     private int selRow = -1, selCol = -1;

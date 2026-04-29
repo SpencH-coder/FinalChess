@@ -1,9 +1,10 @@
+
 /**
  * Empty placeholder for chess move validation.
  * Assume a real rules engine lives here; for the demo every move is legal
  * (except moving onto a piece you already own).
  */
-public class ChessRules {
+public class ChessRule {
 
     /** Return true if the side-to-move may move from (fromR,fromC) to (toR,toC). */
     public boolean isLegalMove(Piece[][] board, int fromR, int fromC, int toR, int toC) {
