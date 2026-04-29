@@ -59,36 +59,69 @@ public class ChessRules {
 	private boolean validateRook(Piece[][] board, int fromR, int fromC, int toR, int toC, Piece.Color color) {
         boolean vertical   = (toR != fromR && toC == fromC);
         boolean horizontal = (toR == fromR && toC != fromC);
-        if (!vertical && !horizontal) return false;
+        if(!vertical && !horizontal){
+			return false;
+		}
 
-        if (vertical) {
-            int step = (toR > fromR) ? 1 : -1;
-            for (int r = fromR + step; r != toR; r += step)
-                if (board[r][fromC] != null) return false;
-        } else {
-            int step = (toC > fromC) ? 1 : -1;
-            for (int c = fromC + step; c != toC; c += step)
-                if (board[fromR][c] != null) return false;
+        if(vertical) {
+            int step;
+			if(toR > fromR){
+				step = 1;   //  right
+			}else{
+				step = -1;  //  left
+			}
+            for(int r = fromR + step; r != toR; r += step)
+                if(board[r][fromC] != null){ 
+					return false;
+			}
+        }else{
+            int step;
+			if(toC > fromC){
+				step = 1;   //  right
+			}else{
+				step = -1;  //  left
+			}
+            for(int c = fromC + step; c != toC; c += step)
+                if(board[fromR][c] != null){
+					return false;
+				}
         }
         return true;
     }
+    
 
     private boolean validateKnight(int fromR, int fromC, int toR, int toC) {
-        int dr = Math.abs(toR - fromR);
-        int dc = Math.abs(toC - fromC);
-        return (dr == 2 && dc == 1) || (dr == 1 && dc == 2);
+        int deltaRow = Math.abs(toR - fromR);
+        int deltaCol = Math.abs(toC - fromC);
+        return (deltaRow == 2 && deltaCol == 1) || (deltaRow == 1 && deltaCol == 2);
     }
 
     private boolean validateBishop(Piece[][] board, int fromR, int fromC, int toR, int toC) {
-        int dr = Math.abs(toR - fromR);
-        int dc = Math.abs(toC - fromC);
-        if (dr != dc || dr == 0) return false;
+        int deltaRow = Math.abs(toR - fromR);
+        int deltaCol = Math.abs(toC - fromC);
+        if (deltaRow != deltaCol || deltaRow == 0){
+			return false;
+		}
 
-        int rowStep = (toR > fromR) ? 1 : -1;
-        int colStep = (toC > fromC) ? 1 : -1;
+        int rowStep;
+        if(toR > fromR){
+			rowStep = 1;   //  right
+		}else{
+			rowStep = -1;  //  left
+		}
+		
+		int colStep;
+        if(toC > fromC){
+			colStep = 1;   //  right
+		}else{
+			colStep = -1;  //  left
+		}
+
         int r = fromR + rowStep, c = fromC + colStep;
         while (r != toR && c != toC) {
-            if (board[r][c] != null) return false;
+            if (board[r][c] != null){
+				return false;
+			}
             r += rowStep;
             c += colStep;
         }
@@ -96,27 +129,32 @@ public class ChessRules {
     }
 
     private boolean validateQueen(Piece[][] board, int fromR, int fromC, int toR, int toC) {
-        int dr = Math.abs(toR - fromR);
-        int dc = Math.abs(toC - fromC);
+        int deltaRow = Math.abs(toR - fromR);
+        int deltaCol = Math.abs(toC - fromC);
         boolean straight = (toR == fromR || toC == fromC);
-        boolean diagonal = (dr == dc && dr != 0);
-        if (!straight && !diagonal) return false;
+        boolean diagonal = (deltaRow == deltaCol && deltaRow != 0);
+        if(!straight && !diagonal){
+			 return false;
+		 }
 
         int rowStep = Integer.signum(toR - fromR);
         int colStep = Integer.signum(toC - fromC);
-        int r = fromR + rowStep, c = fromC + colStep;
+        int r = fromR + rowStep;
+        int c = fromC + colStep;
         while (r != toR || c != toC) {
-            if (board[r][c] != null) return false;
+            if(board[r][c] != null){
+				return false;
+			}
             r += rowStep;
             c += colStep;
         }
         return true;
     }
 
-    private boolean validateKing(int fromR, int fromC, int toR, int toC) {
-        int dr = Math.abs(toR - fromR);
-        int dc = Math.abs(toC - fromC);
-        return dr <= 1 && dc <= 1;
+    private boolean validateKing(int fromR, int fromC, int toR, int toC){
+        int deltaRow = Math.abs(toR - fromR);
+        int deltaCol = Math.abs(toC - fromC);
+        return deltaRow <= 1 && deltaCol <= 1;
     }
 }
 	
